@@ -3,11 +3,15 @@ import os
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen
 from splinter import Browser
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 def init():
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=False)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    browser = Browser('chrome', **executable_path, headless=True)
     return browser
 
 def scrape_nasa():
