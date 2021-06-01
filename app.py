@@ -1,8 +1,10 @@
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
+import os
 import scrape_mars as sm
 app = Flask(__name__)
-mongo = PyMongo(app, uri="mongodb://localhost:27017/mars")
+uri = os.environ['URI']
+mongo = PyMongo(app, uri)
 
 @app.route("/")
 def home():
